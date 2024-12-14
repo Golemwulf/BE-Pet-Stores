@@ -25,14 +25,14 @@ public class PetStoreController {
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public PetStoreData insertPetStore(@RequestBody PetStoreData petStoreData) {
-		log.info("Creating contributor {}", petStoreData);
+		log.info("Creating pet store {}", petStoreData);
 		return petStoreService.savePetStore(petStoreData);
 	}
 
 	@PutMapping("/contributor/{contributorId}")
 	public PetStoreData updatePetStore(@PathVariable Long petStoreId, @RequestBody PetStoreData petStoreData) {
 		petStoreData.setPetStoreId(petStoreId);
-		log.info("Uptating contributor {}", petStoreData);
+		log.info("Uptating pet store with ID={}", petStoreData);
 		return petStoreService.savePetStore(petStoreData);
 	}
 }
