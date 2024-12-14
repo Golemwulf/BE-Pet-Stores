@@ -8,4 +8,8 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
+    defer-datasource-initializtion: true
     
+  sql:
+   init:
+     mode: always
