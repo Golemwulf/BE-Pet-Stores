@@ -182,5 +182,11 @@ public class PetStoreService {
 
 		return employee;
 	}
+	
+	@Transactional(readOnly = false)
+	public void deletePetStoreById(Long petStoreId) {
+		PetStore petStore = findPetStoreById(petStoreId);
+		petStoreDao.delete(petStore);
+	}
 
 }

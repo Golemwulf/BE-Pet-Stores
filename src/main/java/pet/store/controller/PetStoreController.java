@@ -29,7 +29,7 @@ public class PetStoreController {
 	@Autowired
 	private PetStoreService petStoreService;
 
-	@PostMapping
+	@PostMapping("/pet_store")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public PetStoreData insertPetStore(@RequestBody PetStoreData petStoreData) {
 		log.info("Creating pet store {}", petStoreData);
@@ -52,7 +52,7 @@ public class PetStoreController {
 		return petStoreService.saveEmployee(petStoreId, petStoreEmployee);
 	}
 
-	@PostMapping("/{petStoreId}/employee")
+	@PostMapping("/{petStoreId}/customer")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public PetStoreCustomer addCustomerToPetStore(@PathVariable Long petStoreId,
 			@RequestBody PetStoreCustomer petStoreCustomer) {
@@ -61,22 +61,26 @@ public class PetStoreController {
 		return petStoreService.saveCustomer(petStoreId, petStoreCustomer);
 	}
 	
-	@GetMapping
+	@GetMapping("/pet_store")
 	public List<PetStoreData> retrieveAllPetStoreStores(){
 		log.info("Retrieveing all pet stores");
 		return petStoreService.retrieveAllPetStoreStores();
 	}
 	
-	@GetMapping
+	@GetMapping("/pet_store/{petStoreId}")
 	public PetStoreData retrievePetStoreById(@PathVariable Long petStoreId) {
-		log.info("Retrieving pet store with ID= ", petStoreId);
+		log.info("Retrieving pet store with ID= {}", petStoreId);
 		return petStoreService.retrievePetStoreById(petStoreId);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/pet_store/{petStoreId}")
 	public Map<String, String> deletePetStoreById(@PathVariable Long petStoreId){
 		log.info("Deleting pet store with ID= {}", petStoreId);
 		
+		petStoreService.deletePetStoreById(petStoreId);
+		
 		return Map.of("message", "Pet store with ID=" + petStoreId + " deleted.");
 	}
+	
+	
 }
